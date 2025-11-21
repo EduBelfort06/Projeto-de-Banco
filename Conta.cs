@@ -3,21 +3,22 @@ using System.Text.Json.Serialization;
 public class Conta
 {
     public int Numero { get; set; }
-    public string Cliente { get; set; }
-    public string Cpf { get; set; }
-    public string Senha { get; set; }
+    public string Cliente { get; set; } = string.Empty;
+    public string Cpf { get; set; } = string.Empty;
+    [JsonIgnore]
+    public string Senha { get; set; } = string.Empty;
     public decimal Saldo { get; set; }
     public decimal Limite { get; set; }
 
-    [JsonIgnore]
     public decimal SaldoDisponível => Saldo + Limite;
 
-    public Conta(int numero, string cliente, string cpf, string senha, decimal limite = 0)
+    public Conta(int numero, string cliente, string cpf, string senha, decimal saldo = 0, decimal limite = 0)
     {
         Numero = numero;
         Cliente = cliente;
         Cpf = cpf;
         Senha = senha;
+        Saldo = saldo;
         Limite = limite;
     }
 
@@ -66,18 +67,20 @@ public class Conta
     {
         if (valor <= 0)
         {
-            mensagem = "O valor para diminuir o limite deve ser maior que zero.";
+            mensagem = "O valor para reduzir o limite deve ser maior que zero.";
             return false;
         }
+
         if (valor > Limite)
         {
-            mensagem = "Não é possível diminuir mais do que o limite atual.";
+            mensagem = $"Não é possível diminuir mais do que o limite atual ({Limite:C}).";
             return false;
         }
-        decimal novoLimite = Limite - valor;
-        if (Saldo < 0 && abs(Saldo) > novoLimite):
-            pass
-        # Actually python code but ignore logic since file content not executed
+
+        Limite -= valor;
+
         mensagem = $"Limite reduzido com sucesso! Novo limite: {Limite:C}";
         return true;
+    }
+
 }
