@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -10,13 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="SapiensBank.Lib\SapiensBank.Lib.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="SapiensBank.Lib\**\*.cs" />
-    <Compile Remove="SapiensBank.Tests\**\*.cs" />
-    <Compile Remove="SelfTests\**\*.cs" />
+    <ProjectReference Include="..\SapiensBank.Lib\SapiensBank.Lib.csproj" />
   </ItemGroup>
 
 </Project>
